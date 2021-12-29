@@ -1,14 +1,29 @@
 import styled from 'styled-components';
+import { Route, Router, Switch } from 'react-router-dom';
+import { createBrowserHistory } from 'history';
+import ApplicationApp from './ApplicationApp';
 import NxWelcome from './nx-welcome';
+import Login from './Login/Login';
 
 const StyledApp = styled.div`
-  // Your style here
+  height: 100%;
+  width: 100%;
 `;
-
+const history = createBrowserHistory();
 export function App() {
   return (
     <StyledApp>
-      <NxWelcome title="container" />
+      <Router history={history}>
+        <Switch>
+          <Route exact path="/application">
+            <NxWelcome title="container" />
+            <ApplicationApp />
+          </Route>
+          <Route exact path="/">
+            <Login />
+          </Route>
+        </Switch>
+      </Router>
     </StyledApp>
   );
 }
